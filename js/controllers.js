@@ -13,8 +13,8 @@ function IndexController($scope, $http) {
 
   	$http.get("db/deck.json").success(function(response) {
   		$scope.deck = response;
-  		$scope.getCards(2, $scope.dealerCards);
-		$scope.getCards(2, $scope.userCards);
+  		$scope.userPoint = $scope.getCards(2, $scope.userCards);
+  		$scope.dealerPoint = $scope.getCards(2, $scope.dealerCards);
   	});
 
 	$scope.getRandomCard = function() {
@@ -27,16 +27,13 @@ function IndexController($scope, $http) {
 	}
 
 	$scope.getCards = function(count, hand) {
+		var pointSumm = 0;
 		for (var i = 0; i < count; i++) {
 			var cardData = $scope.getRandomCard();
 			hand.push(cardData);
-			if(hand == $scope.userCards){
-				$scope.userPoint += cardData.point;
-			} else {
-				$scope.dealerPoint += cardData.point;
-			}
-
+			pointSumm += cardData.point;
 		}
+		return pointSumm;
 	}
 
 	$scope.addCard = function()	{
