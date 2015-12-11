@@ -1,0 +1,50 @@
+[
+	{
+		"img": [
+			"./img/11.png",
+			"./img/12.png",
+			"./img/13.png",
+			"./img/14.png"
+		],
+		"point": 11, 
+		"type": {
+			"name": "Ace"
+		}
+	},
+	{
+		"img": [
+			"./img/21.png",
+			"./img/22.png",
+			"./img/23.png",
+			"./img/24.png"
+		],
+		"point": 2, 
+		"type": {
+			"name": "2"
+		}
+	},
+	{
+		"img": [
+			"./img/31.png",
+			"./img/32.png",
+			"./img/33.png",
+			"./img/34.png"
+		],
+		"point": 3, 
+		"type": {
+			"name": "3"
+		}
+	},
+	{
+		"img": [
+			"./img/41.png",
+			"./img/42.png",
+			"./img/43.png",
+			"./img/44.png"
+		],
+		"point": 4, 
+		"type": {
+			"name": "4"
+		}
+	}
+]
