@@ -8,7 +8,7 @@
 		],
 		"point": 11, 
 		"type": {
-			"name": "Ace"
+			"name": "A"
 		}
 	},
 	{
@@ -45,6 +45,18 @@
 		"point": 4, 
 		"type": {
 			"name": "4"
+		}
+	},
+	{
+		"img": [
+			"./img/51.png",
+			"./img/52.png",
+			"./img/53.png",
+			"./img/54.png"
+		],
+		"point": 5, 
+		"type": {
+			"name": "5"
 		}
 	}
 ]
