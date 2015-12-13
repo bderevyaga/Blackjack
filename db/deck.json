@@ -58,5 +58,101 @@
 		"type": {
 			"name": "5"
 		}
+	},
+	{
+		"img": [
+			"./img/61.png",
+			"./img/62.png",
+			"./img/63.png",
+			"./img/64.png"
+		],
+		"point": 6, 
+		"type": {
+			"name": "6"
+		}
+	},
+	{
+		"img": [
+			"./img/71.png",
+			"./img/72.png",
+			"./img/73.png",
+			"./img/74.png"
+		],
+		"point": 7, 
+		"type": {
+			"name": "7"
+		}
+	},
+	{
+		"img": [
+			"./img/81.png",
+			"./img/82.png",
+			"./img/83.png",
+			"./img/84.png"
+		],
+		"point": 8, 
+		"type": {
+			"name": "8"
+		}
+	},
+	{
+		"img": [
+			"./img/91.png",
+			"./img/92.png",
+			"./img/93.png",
+			"./img/94.png"
+		],
+		"point": 9, 
+		"type": {
+			"name": "9"
+		}
+	},
+	{
+		"img": [
+			"./img/A1.png",
+			"./img/A2.png",
+			"./img/A3.png",
+			"./img/A4.png"
+		],
+		"point": 10, 
+		"type": {
+			"name": "A"
+		}
+	},
+	{
+		"img": [
+			"./img/B1.png",
+			"./img/B2.png",
+			"./img/B3.png",
+			"./img/B4.png"
+		],
+		"point": 10, 
+		"type": {
+			"name": "B"
+		}
+	},
+	{
+		"img": [
+			"./img/C1.png",
+			"./img/C2.png",
+			"./img/C3.png",
+			"./img/C4.png"
+		],
+		"point": 10, 
+		"type": {
+			"name": "C"
+		}
+	},
+	{
+		"img": [
+			"./img/D1.png",
+			"./img/D2.png",
+			"./img/D3.png",
+			"./img/D4.png"
+		],
+		"point": 10, 
+		"type": {
+			"name": "D"
+		}
 	}
 ]

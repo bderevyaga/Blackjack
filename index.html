@@ -9,14 +9,21 @@
 	<div class="app" ng-controller="IndexController">
 		<div class="cards">
 			<ul class="dealer">
-				<li ng-repeat="dealerCard in dealerCards" ng-style="{ 'left': ($index * 20) + 'px' }"><img ng-src="{{dealerCard.img}}" alt="t1"></li>
+				<li ng-repeat="dealerCard in dealerCards" ng-style="{ 'left': ($index * 20) + 'px' }">
+					<img ng-if="openDealerCards" ng-src="{{dealerCard.img}}" alt="t1">
+					<img ng-if="!openDealerCards" src="./img/00.png" alt="t1">
+				</li>
 			</ul>
 			<ul class="user">
 				<li ng-repeat="userCard in userCards" ng-style="{ 'left': ($index * 20) + 'px' }"><img ng-src="{{userCard.img}}" alt="t1"></li>
 			</ul>
-			<div>User point: {{userPoint}}</div>
-			<div>Dealer point: {{dealerPoint}}</div>
+			<div >
+				<div>Очки користувача: {{userPoint}}</div>
+				<div ng-if="openDealerCards">Очки ділера: {{dealerPoint}}</div>
+				<div ng-if="openDealerCards">Результат: {{status}}</div>				
+			</div>
 			<button ng-click="endGame()">Вскрить карти</button>
+			<button ng-click="newGame()">Нова игра</button>
 		</div>
 		<div class="pack"><img ng-click="addCard()" src="./img/00.png" alt="cover"></div>
 	</div>

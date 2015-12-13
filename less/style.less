@@ -1,0 +1,38 @@
+body {
+	padding: 0;
+	margin: 0;
+}
+
+ul {
+	position: relative;
+	padding: 0;
+	margin: 20px;
+	height: 150px;
+	li {
+		display: inline;
+		position: absolute;
+		top: 0;
+		left: 0;
+		padding: 0;
+		margin: 0;
+		z-index: 1;
+		&:hover {
+			z-index: 2;
+		}
+	}
+}
+
+.app {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+.cards {
+	width: 600px;
+}
+.pack img, ul li img {
+	cursor: pointer;
+}

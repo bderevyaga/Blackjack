@@ -3,19 +3,30 @@ app.controller("IndexController", IndexController);
 function getRandomInt(min, max) {
  	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
+function dealerAI(min, max, point) {
+ 	var ai = getRandomInt(min, max);
+ 	if(ai >= ( 21 - point )){
+ 		return false;
+ 	}
+ 	return true;
+}
 function IndexController($scope, $http) {
-	$scope.userPoint = 0;
-	$scope.dealerPoint = 0;
-	$scope.dealerCards = [];
-	$scope.userCards = [];
-  	$scope.deck = [];
+	$scope.newGame = function()	{
+		$scope.userPoint = 0;
+		$scope.dealerPoint = 0;
+		$scope.dealerCards = [];
+		$scope.userCards = [];
+		$scope.openDealerCards = false;
+	  	$scope.deck = [];
 
-  	$http.get("db/deck.json").success(function(response) {
-  		$scope.deck = response;
-  		$scope.userPoint = $scope.getCards(2, $scope.userCards);
-  		$scope.dealerPoint = $scope.getCards(2, $scope.dealerCards);
-  	});
+	  	$http.get("db/deck.json").success(function(response) {
+	  		$scope.deck = response;
+	  		$scope.userPoint = $scope.getCards(2, $scope.userCards);
+	  		$scope.dealerPoint = $scope.getCards(2, $scope.dealerCards);
+	  	});
+	}
+	
+	$scope.newGame();
 
 	$scope.getRandomCard = function() {
 		if($scope.deck.length == 0){
@@ -25,7 +36,7 @@ function IndexController($scope, $http) {
 		var colorIndex = getRandomInt(0, $scope.deck[cardIndex].img.length - 1);
 		var card = {
 			"img": $scope.deck[cardIndex].img[colorIndex],
-			"point": $scope.deck[cardIndex].point
+			"point": $scope.deck[cardIndex].point,
 		};
 
 		$scope.deck[cardIndex].img.splice(colorIndex, 1);
@@ -53,13 +64,16 @@ function IndexController($scope, $http) {
 			$scope.userCards.push(cardData);
 			$scope.userPoint += cardData.point;
 		}else{
-			console.log("Карти закончились");
+			$scope.status = "Карти закончились";
 		}
 	}
 
 	$scope.addDealerCard = function()	{
-		if($scope.dealerPoint >= 21){
-			return false;
+		if($scope.dealerPoint > 10){
+			var aiStatus = dealerAI(2, 11, $scope.dealerPoint);
+			if(!aiStatus){
+				return false;
+			}
 		}
 		var cardData = $scope.getRandomCard();
 		if(cardData){
@@ -67,24 +81,27 @@ function IndexController($scope, $http) {
 			$scope.dealerPoint += cardData.point;
 			return true;
 		}else{
-			console.log("Карти закончились");
+			$scope.status = "Карти закончились";
 			return false;
 		}
 	}
 
 	$scope.endGame = function()	{
 		var status = true;
+
+		$scope.openDealerCards = true;
+
 		while(status){
 			status = $scope.addDealerCard();
 		}
 		if($scope.userPoint > 21 && $scope.dealerPoint > 21 || $scope.userPoint == $scope.dealerPoint){
-			console.log("Ничя");
+			$scope.status = "Ничя";
 			return false;
 		}
 		if($scope.userPoint > $scope.dealerPoint && $scope.userPoint <= 21 || $scope.dealerPoint > 21){
-			console.log("Вы виграли");
+			$scope.status = "Вы виграли";
 		}else{
-			console.log("Дилер вииграл");		
+			$scope.status = "Дилер вииграл";		
 		}
 	}
 }
