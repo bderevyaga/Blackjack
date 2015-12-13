@@ -11,13 +11,27 @@ function dealerAI(min, max, point) {
  	return true;
 }
 function IndexController($scope, $http) {
+	var gameStatus = true;
+	$scope.userMoney = 100;
+	$scope.addMoney = function(){
+		if(gameStatus){
+			if($scope.userMoney > 0){
+				$scope.userMoney -= 10;
+				$scope.userAnte += 10;
+			}
+		}
+	}
 	$scope.newGame = function()	{
+		gameStatus = true;
+		$scope.openDealerCards = false;
+		$scope.userAnte = 0;
 		$scope.userPoint = 0;
 		$scope.dealerPoint = 0;
 		$scope.dealerCards = [];
 		$scope.userCards = [];
-		$scope.openDealerCards = false;
 	  	$scope.deck = [];
+	  	$scope.userMoney -= 10;
+		$scope.userAnte += 10;
 
 	  	$http.get("db/deck.json").success(function(response) {
 	  		$scope.deck = response;
@@ -25,7 +39,7 @@ function IndexController($scope, $http) {
 	  		$scope.dealerPoint = $scope.getCards(2, $scope.dealerCards);
 	  	});
 	}
-	
+
 	$scope.newGame();
 
 	$scope.getRandomCard = function() {
@@ -59,12 +73,15 @@ function IndexController($scope, $http) {
 	}
 
 	$scope.addCard = function()	{
-		var cardData = $scope.getRandomCard();
-		if(cardData){
-			$scope.userCards.push(cardData);
-			$scope.userPoint += cardData.point;
-		}else{
-			$scope.status = "Карти закончились";
+		if(gameStatus){
+			var cardData = $scope.getRandomCard();
+			if(cardData){
+				$scope.userCards.push(cardData);
+				$scope.userPoint += cardData.point;
+				if($scope.userPoint > 21){
+					$scope.endGame();
+				}
+			}
 		}
 	}
 
@@ -81,27 +98,28 @@ function IndexController($scope, $http) {
 			$scope.dealerPoint += cardData.point;
 			return true;
 		}else{
-			$scope.status = "Карти закончились";
+			$scope.status = "Карти закінчились";
 			return false;
 		}
 	}
 
 	$scope.endGame = function()	{
 		var status = true;
-
-		$scope.openDealerCards = true;
-
-		while(status){
-			status = $scope.addDealerCard();
-		}
-		if($scope.userPoint > 21 && $scope.dealerPoint > 21 || $scope.userPoint == $scope.dealerPoint){
-			$scope.status = "Ничя";
-			return false;
-		}
-		if($scope.userPoint > $scope.dealerPoint && $scope.userPoint <= 21 || $scope.dealerPoint > 21){
-			$scope.status = "Вы виграли";
-		}else{
-			$scope.status = "Дилер вииграл";		
+		if(gameStatus){
+			gameStatus = false;
+			$scope.openDealerCards = true;
+			while(status){
+				status = $scope.addDealerCard();
+			}
+			if($scope.userPoint > 21 && $scope.dealerPoint > 21 || $scope.userPoint == $scope.dealerPoint){
+				$scope.status = "Нічя";
+				$scope.userMoney += $scope.userAnte;	
+			}else if($scope.userPoint > $scope.dealerPoint && $scope.userPoint <= 21 || $scope.dealerPoint > 21){
+				$scope.status = "Ви виграли";
+				$scope.userMoney += ($scope.userAnte * 2);	
+			}else{
+				$scope.status = "Ділер вииграл";		
+			}
 		}
 	}
 }
