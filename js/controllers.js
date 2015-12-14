@@ -3,6 +3,7 @@ app.controller("IndexController", IndexController);
 function getRandomInt(min, max) {
  	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+// Інтелект ділера
 function dealerAI(min, max, point) {
  	var ai = getRandomInt(min, max);
  	if(ai >= ( 21 - point )){
@@ -12,15 +13,21 @@ function dealerAI(min, max, point) {
 }
 function IndexController($scope, $http) {
 	var gameStatus = true;
-	$scope.userMoney = 100;
+	if(!localStorage.getItem('userMoney')){
+		localStorage.setItem('userMoney', 100);		
+	}
+	$scope.userMoney = localStorage.getItem('userMoney');
+	//Поставити гроші
 	$scope.addMoney = function(){
 		if(gameStatus){
 			if($scope.userMoney > 0){
 				$scope.userMoney -= 10;
 				$scope.userAnte += 10;
 			}
+			localStorage.setItem('userMoney', $scope.userMoney);
 		}
 	}
+	//Нова гра 
 	$scope.newGame = function()	{
 		gameStatus = true;
 		$scope.openDealerCards = false;
@@ -32,6 +39,7 @@ function IndexController($scope, $http) {
 	  	$scope.deck = [];
 	  	$scope.userMoney -= 10;
 		$scope.userAnte += 10;
+		localStorage.setItem('userMoney', $scope.userMoney);
 
 	  	$http.get("db/deck.json").success(function(response) {
 	  		$scope.deck = response;
@@ -41,11 +49,8 @@ function IndexController($scope, $http) {
 	}
 
 	$scope.newGame();
-
+	//Береться з колоди рандомна карта
 	$scope.getRandomCard = function() {
-		if($scope.deck.length == 0){
-			return null;
-		}
 		var cardIndex = getRandomInt(0, $scope.deck.length - 1);
 		var colorIndex = getRandomInt(0, $scope.deck[cardIndex].img.length - 1);
 		var card = {
@@ -59,32 +64,28 @@ function IndexController($scope, $http) {
 		}
 		return card;
 	}
-
+	//Видається декілька карт 
 	$scope.getCards = function(count, hand) {
 		var pointSumm = 0;
 		for (var i = 0; i < count; i++) {
 			var cardData = $scope.getRandomCard();
-			if(cardData){
-				hand.push(cardData);
-				pointSumm += cardData.point;
-			}
+			hand.push(cardData);
+			pointSumm += cardData.point;
 		}
 		return pointSumm;
 	}
-
+	//Користувач бере карту
 	$scope.addCard = function()	{
 		if(gameStatus){
 			var cardData = $scope.getRandomCard();
-			if(cardData){
-				$scope.userCards.push(cardData);
-				$scope.userPoint += cardData.point;
-				if($scope.userPoint > 21){
-					$scope.endGame();
-				}
+			$scope.userCards.push(cardData);
+			$scope.userPoint += cardData.point;
+			if($scope.userPoint > 21){
+				$scope.endGame();
 			}
 		}
 	}
-
+	//Ділер бере карту
 	$scope.addDealerCard = function()	{
 		if($scope.dealerPoint > 10){
 			var aiStatus = dealerAI(2, 11, $scope.dealerPoint);
@@ -93,16 +94,11 @@ function IndexController($scope, $http) {
 			}
 		}
 		var cardData = $scope.getRandomCard();
-		if(cardData){
-			$scope.dealerCards.push(cardData);
-			$scope.dealerPoint += cardData.point;
-			return true;
-		}else{
-			$scope.status = "Карти закінчились";
-			return false;
-		}
+		$scope.dealerCards.push(cardData);
+		$scope.dealerPoint += cardData.point;
+		return true;
 	}
-
+	//Ділер набирає карти, відкрити карти і вивисти результат гри
 	$scope.endGame = function()	{
 		var status = true;
 		if(gameStatus){
@@ -118,8 +114,9 @@ function IndexController($scope, $http) {
 				$scope.status = "Ви виграли";
 				$scope.userMoney += ($scope.userAnte * 2);	
 			}else{
-				$scope.status = "Ділер вииграл";		
+				$scope.status = "Ділер виграв";		
 			}
+			localStorage.setItem('userMoney', $scope.userMoney);
 		}
 	}
 }
