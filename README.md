@@ -1,5 +1,3 @@
 # BlackJack
-BlackJack /n
-11.12.2015 - Реалізовано ччастковий функціонал. /n
-12.12.2015 - Реалізовано спрощене AI ділера. /n
-силка http://donet.hol.es/test/
+BlackJack 
+http://donet.hol.es/test/
