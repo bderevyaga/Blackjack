@@ -1,3 +1,2 @@
-# BlackJack
-BlackJack 
-http://donet.hol.es/test/
+# Blackjack
+Blackjack 
