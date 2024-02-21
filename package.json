@@ -3,11 +3,15 @@
   "description": "bad shrinkwrap is bad",
   "version": "0.0.0",
   "private": true,
+  "scripts": {
+    "prod": "serve -s . -l 3000"
+  },
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-connect": "^2.2.0",
     "gulp-livereload": "^3.8.1",
-    "gulp-notify": "^2.2.0"
+    "gulp-notify": "^2.2.0",
+    "serve": "^14.2.1"
   }
 }
