@@ -1,62 +1,91 @@
 body {
-	padding: 0;
-	margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .app {
-	.game{
-		margin: 0 auto;
-		width: 700px;
-	    display: flex;
-	    flex-direction: row;
-	    flex-wrap: nowrap;
-	    justify-content: space-between;
-	    align-content: center;
-	    align-items: center;
-	    ul {
-			position: relative;
-			padding: 0;
-			margin: 20px;
-			height: 150px;
-			li {
-				display: inline;
-				position: absolute;
-				top: 0;
-				left: 0;
-				padding: 0;
-				margin: 0;
-				z-index: 1;
-				&:hover {
-					z-index: 2;
-				}
-			}
-		}
-		.cards {
-			width: 600px;
-		}
-		.pack img, ul li img {
-			cursor: pointer;
-		}
-	}
-	.gameControl{
-		margin: 0 auto;
-		width: 700px;
-		height: 100px;
-		display: flex;
-	    flex-direction: row;
-	    flex-wrap: nowrap;
-	    justify-content: space-between;
-	    align-content: center;
-	    align-items: center;
-	    .status{
-	    	width: 180px;
-	    	p {
-	    		margin: 0;
-	    		width: 180;
-	    		.label{
-	    			float: right;
-	    		}
-	    	}
-	    }
-	}
+  .game {
+    margin: 0 auto;
+    width: 700px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+
+    ul {
+      position: relative;
+      padding: 0;
+      margin: 20px;
+      height: 150px;
+
+      li {
+        display: inline;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0;
+        margin: 0;
+        z-index: 1;
+
+        &:hover {
+          z-index: 2;
+        }
+      }
+    }
+
+    .cards {
+      width: 600px;
+    }
+
+    .pack {
+      position: relative;
+      display: inline-block;
+
+      .pack-label {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 6px 12px;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        font-size: 12px;
+        text-align: center;
+        border-radius: 12px;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+    }
+
+    .pack img, ul li img {
+      cursor: pointer;
+    }
+  }
+
+  .gameControl {
+    margin: 0 auto;
+    width: 700px;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+
+    .status {
+      width: 180px;
+
+      p {
+        margin: 0;
+        width: 180px;
+
+        .label {
+          float: right;
+        }
+      }
+    }
+  }
 }

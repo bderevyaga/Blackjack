@@ -5,22 +5,16 @@ body {
 .app .game {
   margin: 0 auto;
   width: 700px;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-flex-wrap: nowrap;
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
-  -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
-  -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
 }
@@ -45,6 +39,24 @@ body {
 .app .game .cards {
   width: 600px;
 }
+.app .game .pack {
+  position: relative;
+  display: inline-block;
+}
+.app .game .pack .pack-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  border-radius: 12px;
+  pointer-events: none;
+  white-space: nowrap;
+}
 .app .game .pack img,
 .app .game ul li img {
   cursor: pointer;
@@ -53,22 +65,16 @@ body {
   margin: 0 auto;
   width: 700px;
   height: 100px;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-flex-wrap: nowrap;
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
-  -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
-  -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
 }
@@ -77,7 +83,7 @@ body {
 }
 .app .gameControl .status p {
   margin: 0;
-  width: 180;
+  width: 180px;
 }
 .app .gameControl .status p .label {
   float: right;

@@ -23,21 +23,25 @@
 					</li>
 				</ul>
 			</div>
-			<div class="pack"><img ng-click="addCard()" src="./img/00.png" alt="cover"></div>			
+			<div class="pack">
+                <p ng-if="openDealerCards" class="pack-label">Взяти карти</p>
+                <p ng-if="!openDealerCards" class="pack-label">Взяти карту</p>
+				<img ng-click="addCard()" src="./img/00.png" alt="cover">
+			</div>
 		</div>
 		<div class="gameControl">
 			<div>
-				<button ng-disabled="openDealerCards" type="button" class="btn btn-primary btn-sm" ng-click="addMoney()">Підняти ставку</button>
+				<button ng-disabled="openDealerCards || userMoney <= 0" type="button" class="btn btn-primary btn-sm" ng-click="addMoney()">Підняти ставку</button>
 				<button ng-disabled="openDealerCards" type="button" class="btn btn-primary btn-sm" ng-click="endGame()">Відкрити карти</button>
-				<button ng-disabled="!openDealerCards" type="button" class="btn btn-primary btn-sm" ng-click="newGame()">Нова гра</button>	
-			</div>	
+				<button ng-disabled="!openDealerCards" type="button" class="btn btn-primary btn-sm" ng-click="newGame()">Нова гра</button>
+			</div>
 			<div class="status">
-				<p>Гроші: <span class="label label-success">{{userMoney}}</span></p>
+				<p>Готівка: <span class="label label-success">{{userMoney}}</span></p>
 				<p>Ставка: <span class="label label-primary">{{userAnte}}</span></p>
 				<p>Ваші очки: <span class="label label-info">{{userPoint}}</span></p>
-				<p ng-if="openDealerCards">Очки ділера: <span class="label label-danger">{{dealerPoint}}</span></p>
+				<p ng-if="openDealerCards">Очки дилера: <span class="label label-danger">{{dealerPoint}}</span></p>
 				<p ng-if="openDealerCards">Результат: <span class="label label-primary">{{status}}</span></p>
-			</div>		
+			</div>
 		</div>
 	</div>
 	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
