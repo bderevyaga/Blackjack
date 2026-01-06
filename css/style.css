@@ -87,4 +87,8 @@ body {
 }
 .app .gameControl .status p .label {
   float: right;
+  display: inline-block;
+  min-width: 40px;
+  min-height: 16px;
+  text-align: center;
 }
