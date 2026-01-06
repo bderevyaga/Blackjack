@@ -78,17 +78,20 @@ body {
   -ms-flex-align: center;
   align-items: center;
 }
-.app .gameControl .status {
+.app .gameControl > .status {
   width: 180px;
 }
-.app .gameControl .status p {
+.app .gameControl > .status p {
   margin: 0;
   width: 180px;
 }
-.app .gameControl .status p .label {
+.app .gameControl > .status p .label {
   float: right;
   display: inline-block;
   min-width: 40px;
   min-height: 16px;
   text-align: center;
+}
+.app .gameControl > .status p .label.status {
+  min-width: 85px;
 }
